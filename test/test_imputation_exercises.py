@@ -4,7 +4,7 @@ import pytest
 from pandas.testing import assert_frame_equal
 from pandas.testing import assert_series_equal
 
-from scripts.imputation import impute, impute_min, impute_with_max
+from scripts.imputation import impute_mean, impute_min, impute_max
     
 # EXERCISE 1
 
@@ -20,7 +20,7 @@ def test_impute_min_one_value():
 def test_impute_max_one_value():
     data = pd.Series([1.0, np.nan, 3.0])    # 1. Define some input data
     expected = pd.Series([1.0, 3.0, 3.0])   # 2. Define what is expected to happen
-    actual = impute_with_max(data)  				  	       # 3. Run function and record what happens
+    actual = impute_max(data)  				  	       # 3. Run function and record what happens
     assert_series_equal(expected, actual)   # 4. Make sure expected and actual are equal
 
 @pytest.mark.skip(reason="it fails")
@@ -36,5 +36,5 @@ def test_impute_min_two_values():
 def test_impute_all_nan():
     data = pd.Series([np.nan, np.nan, np.nan])    # 1. Define some input data
     expected = pd.Series([np.nan, np.nan, np.nan])   # 2. Define what is expected to happen
-    actual = impute(data)  				  	       # 3. Run function and record what happens 
+    actual = impute_mean(data)  				  	       # 3. Run function and record what happens 
     assert_series_equal(expected, actual)   # 4. Make sure expected and actual are equal
